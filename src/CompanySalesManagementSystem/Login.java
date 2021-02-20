@@ -17,7 +17,7 @@ public class Login {
 			scan= new Scanner(System.in);
 			BufferedWriter bf = new BufferedWriter(new FileWriter("G:\\passwords\\password.txt",true));
 			
-			System.out.println("\nEnter your name :");
+			System.out.println("Enter your name :");
 			username=scan.nextLine();
 			
 			System.out.println("Enter password");
@@ -32,7 +32,7 @@ public class Login {
 			}
 			else
 			{
-				System.out.println("Password incorrect, try agian");
+				System.out.println("Password incorrect, try again");
 			}
 			
 			
