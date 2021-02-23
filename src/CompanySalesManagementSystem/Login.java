@@ -9,40 +9,35 @@ public class Login {
 	static String username;
 	static String password;
 	static String confirmpassword;
+	static int option;
 
 	public static void main(String args[]) {
 
-		try {
+		
+		scan= new Scanner(System.in);
+		System.out.println("Enter Login");
+		option =scan.nextInt();
+		
+		do
+		{
+		switch(option)
+		{
+		case 1:
+			break;
 			
-			scan= new Scanner(System.in);
-			BufferedWriter bf = new BufferedWriter(new FileWriter("G:\\passwords\\password.txt",true));
+		case 2:
+			break;
 			
-			System.out.println("Enter your name :");
-			username=scan.nextLine();
-			
-			System.out.println("Enter password");
-			password=scan.nextLine();
-			
-			System.out.println("Confirm password");
-			confirmpassword=scan.nextLine();
-			
-			if(password.equals(confirmpassword))
-			{
-				System.out.println("The admin has been added successfully");
-			}
-			else
-			{
-				System.out.println("Password incorrect, try again");
-			}
-			
-			
-			bf.write(username);
-			bf.newLine();
-			bf.write(password);
-
-			bf.close();
-		} catch (Exception e) {
-			e.printStackTrace();
+		case 3:
+			break;
+					
 		}
+		System.out.println("please Make a correct decision");
 	}
+while(option!=4);
+		
+		
+	
+
+}
 }
