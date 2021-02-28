@@ -130,9 +130,10 @@ public class Login {
 			
 			catch(Exception e)
 			{
-				System.out.println("\nPLease make a correct Suggestion");;
-			}
+				System.out.println("\nPLease make a correct Suggestion");
 		
+			}
+	
 	}
 	
 	public static void addnewcustomer()
@@ -187,7 +188,7 @@ public class Login {
 			do
 			{
 				
-				System.out.println("\n \t \t \tChoose you're criteria");
+				System.out.println("\n \t \t \t Choose you're criteria");
 				System.out.println("\n 1.Admin"
 						+ "\n 2.Supplier"
 						+ "\n 3.Customer"
@@ -218,7 +219,7 @@ public class Login {
 				}
 				
 			}while(option!=-137);
-			System.out.println("Please make a selection from the above !!!");
+			System.out.println(" Please make a selection from the above !!!");
 		}
 
 		catch(Exception e)
