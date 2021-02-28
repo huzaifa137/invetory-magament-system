@@ -6,25 +6,31 @@ import java.util.*;
 class demo
 {
 	
-	Connection con;
+	
 	static String url="jdbc:mysql://localhost:3306/inventory";
 	static String name="root";
 	static String pass="";
+	static String query="Select name from suppliers"; 
+	static Connection con;
+	static Scanner scan;
 	
 	public static void suppliertable() throws SQLException
 	{
 		
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
-			Connection con =DriverManager.getConnection(url, name, pass);
+			con =DriverManager.getConnection(url, name, pass);
 			Statement st = con.createStatement();
 		
 			ResultSet rs = st.executeQuery("select * from suppliers");
 			
 			while(rs.next())
 			{
+				
+				System.out.println("\n \t \t \t Supplier Details ");
+				
 				String table = rs.getInt(1) + " " + rs.getString(2) + " " + rs.getString(3) + " " + rs.getDate(4) + " " + rs.getInt(5);
-				System.out.println(table);
+				System.out.println("\n " + table);
 				
 			}
 				} catch (ClassNotFoundException e) {
@@ -32,29 +38,28 @@ class demo
 		}
 	}
 	
-		
-		public void catagories() throws ClassNotFoundException, SQLException
+	public static void suppliername() throws ClassNotFoundException, SQLException
 		{
 			
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			con = DriverManager.getConnection(url, name, pass);
-			
-			PreparedStatement st = con.prepareStatement("select * from suppliers");
+
+			PreparedStatement st = con.prepareStatement("select name from suppliers");
 			ResultSet rs = st.executeQuery();
 			
 			while(rs.next())
 			{
-				String x = rs.getInt(1) + " " + rs.getString(2) + " " + rs.getString(3) + "" + rs.getDate(4) + " " + rs.getInt(5);
 				
-				System.out.println(x);
+				System.out.println("\t \tSupplier Names");
+				System.out.println("\n" + rs.getString("name"));
 				
 			}
 		}	
 
-public void number()
-{
+	public void number()
+	{
 	
-}
+	}
 
 }
 
@@ -63,11 +68,11 @@ public class suppliers extends demo {
 		static Scanner scan;
 		static int choice;
 		
-		public static void main(String args[]) throws SQLException
+		public static void main(String args[]) throws SQLException, ClassNotFoundException
 		{
 			scan = new Scanner(System.in);
 				
-			System.out.println("\t \t \t Supplier Menu ");
+			System.out.println(" \t \t \t Supplier's Menu ");
 			
 		
 			do
@@ -77,7 +82,7 @@ public class suppliers extends demo {
 						+ "\n 3. view supplier sales catagories"
 						+ "\n 4. Amount of goods per Supplier");
 				
-				System.out.println("Make a choice from the Above");
+				System.out.println("\n \n \t \t \t Make a choice from the Above");
 				choice = scan.nextInt();
 				
 				switch(choice)
@@ -86,10 +91,13 @@ public class suppliers extends demo {
 				case 1:
 					suppliertable();
 					break;
+					
+				case 2:
+					suppliername();
+					break;
 				
 				}
-				
-				
+					
 			}while(choice != -10);
 	}
 }
