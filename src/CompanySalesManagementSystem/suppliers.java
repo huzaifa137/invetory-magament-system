@@ -50,17 +50,50 @@ class demo
 			while(rs.next())
 			{
 				
-				System.out.println("\t \tSupplier Names");
+				System.out.println("\nSupplier'sname");
 				System.out.println("\n" + rs.getString("name"));
 				
 			}
 		}	
 
-	public void number()
+	public static void categories()throws ClassNotFoundException, SQLException
 	{
 	
+		{
+			
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			con = DriverManager.getConnection(url, name, pass);
+
+			PreparedStatement st = con.prepareStatement("select name , category_of_commodity from suppliers");
+			ResultSet rs = st.executeQuery();
+			
+			while(rs.next())
+			{
+				
+				System.out.println("\nName   \t \t categories");
+				System.out.println("\n" + rs.getString("name") + " \t  " + rs.getString("category_of_commodity"));
+				
+			}
+		}	
 	}
 
+	public static void number_of_products() throws ClassNotFoundException, SQLException
+	{
+		
+		Class.forName("com.mysql.cj.jdbc.Driver");
+		con = DriverManager.getConnection(url, name, pass);
+
+		PreparedStatement st = con.prepareStatement("select name , category_of_commodity, Amount_of_products from suppliers");
+		ResultSet rs = st.executeQuery();
+		
+		while(rs.next())
+		{
+			
+			System.out.println("\nName \t categories \t Amount_of_products");
+			System.out.println("\n" + rs.getString("name") + "\t  " + rs.getString("category_of_commodity") + "\t \t \t" + rs.getInt("Amount_of_products"));
+		}
+	}
+	
 }
 
 public class suppliers extends demo {
@@ -71,18 +104,16 @@ public class suppliers extends demo {
 		public static void main(String args[]) throws SQLException, ClassNotFoundException
 		{
 			scan = new Scanner(System.in);
-				
-			System.out.println(" \t \t \t Supplier's Menu ");
-			
 		
 			do
 			{
-				System.out.println("\n 1. view all supplier Details"
+				System.out.println("\n \t \t \t Menu \n "
+						+ "\n 1. view all supplier Details"
 						+ "\n 2. View Supplier's Name"
 						+ "\n 3. view supplier sales catagories"
 						+ "\n 4. Amount of goods per Supplier");
 				
-				System.out.println("\n \n \t \t \t Make a choice from the Above");
+				System.out.println("\n \n \t \tMake a choice from the Above");
 				choice = scan.nextInt();
 				
 				switch(choice)
@@ -95,9 +126,19 @@ public class suppliers extends demo {
 				case 2:
 					suppliername();
 					break;
+				case 3:
+					categories();
+					break;
 				
-				}
+				case 4:
+					number_of_products();
+					break;
+				
+				default :System.out.println("Please make a correct Selection !!!");
 					
+				}
+				
+				
 			}while(choice != -10);
 	}
 }
