@@ -101,13 +101,15 @@ public class suppliers extends demo {
 		static Scanner scan;
 		static int choice;
 		
-		public static void main(String args[]) throws SQLException, ClassNotFoundException
-		{
-			scan = new Scanner(System.in);
 		
+		public void collect() throws SQLException, ClassNotFoundException
+		{
+			
+			scan = new Scanner(System.in);
+			
 			do
 			{
-				System.out.println("\n \t \t \t Menu \n "
+				System.out.println("\n \t \t \t Supplier's Menu \n "
 						+ "\n 1. view all supplier Details"
 						+ "\n 2. View Supplier's Name"
 						+ "\n 3. view supplier sales catagories"
@@ -140,6 +142,16 @@ public class suppliers extends demo {
 				
 				
 			}while(choice != -10);
+			
+		}
+		
+		
+		public static void main(String args[]) throws ClassNotFoundException, SQLException
+		{
+			
+			suppliers nm = new suppliers();
+			nm.collect();
 	}
 }
+
 

@@ -2,6 +2,7 @@ package CompanySalesManagementSystem;
 
 import java.util.*;
 import java.io.*;
+import java.sql.SQLException;
 
 public class Login {
 
@@ -9,12 +10,41 @@ public class Login {
 	static String username;
 	static String password;
 	static String confirmpassword;
-	static int option;
+	static int option,flag=0;
 	
+	public static void swap() throws ClassNotFoundException, SQLException
+	{
+		suppliers sp = new suppliers();		
+		scan = new Scanner(System.in);
+		
+		
+		do{
+				System.out.println("\n \t \t \t MENU \n "
+						+ "\n 1.General Information"
+						+ "\n 1.Customer Details"
+						+ "\n 2.Supplier Details"
+						+ "\n 3.Products Details"
+						+ "\n 4.company Sales"
+						+ "\n 5.Accounting Details");
+				
+				System.out.println("\n Select catagory");
+				option =scan.nextInt();
+				
+				switch(option)
+				{
+				case 1:
+					sp.collect();
+					break;
+				
+				}
+		}while(option!=-12);
+		
+	}
 	
 	public static void Admin() {
 		
 		try {
+			
 		BufferedReader bf = new BufferedReader( new FileReader("G:\\passwords\\Adminusername.txt"));
 		BufferedReader bf2 = new BufferedReader( new FileReader("G:\\passwords\\Adminpasswword.txt"));
 		
@@ -33,7 +63,12 @@ public class Login {
 				if(username.equals(x) && password.equals(y))
 				{
 					
-						System.out.println("\nAdmin Login Successfully");
+						System.out.println("\n \t \tAdmin Login Successfully \n ");
+						flag=1;
+						
+						if(flag==1) {
+							swap();
+						}
 						break;
 				}
 				else
@@ -44,6 +79,7 @@ public class Login {
 			}
 			bf.close();
 			bf2.close();
+			
 		}
 		
 		catch(Exception e)
@@ -178,8 +214,8 @@ public class Login {
 		
 	}
 	
-	
-	public static void main(String args[]){
+	public void login()
+	{
 		
 		try
 		{
@@ -226,6 +262,15 @@ public class Login {
 		{
 			System.out.println("\n \t \t \t Please make a correct Selection of the Above");
 		}
-	
+		
 	}
+	
+	public static void main(String args[]){
+		
+		Login nm = new Login();
+		nm.login();
+		
+	}
+	
+	
 }
