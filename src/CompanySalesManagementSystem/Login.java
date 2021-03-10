@@ -21,11 +21,11 @@ public class Login {
 		do{
 				System.out.println("\n \t \t \t MENU \n "
 						+ "\n 1.General Information"
-						+ "\n 1.Customer Details"
-						+ "\n 2.Supplier Details"
-						+ "\n 3.Products Details"
-						+ "\n 4.company Sales"
-						+ "\n 5.Accounting Details");
+						+ "\n 2.Customer Details"
+						+ "\n 3.Supplier Details"
+						+ "\n 4.Products Details"
+						+ "\n 5.company Sales"
+						+ "\n 6.Accounting Details");
 				
 				System.out.println("\n Select catagory");
 				option =scan.nextInt();
@@ -224,14 +224,14 @@ public class Login {
 			do
 			{
 				
-				System.out.println("\n \t \t \t Choose you're criteria");
+				System.out.println("\n \t \t \t Login As  ");
 				System.out.println("\n 1.Admin"
 						+ "\n 2.Supplier"
 						+ "\n 3.Customer"
 						+ "\n 4.New Customer");
 				
 				
-				System.out.println("\nLogin as :  ");
+				System.out.println("\n Choose you're criteria \n");
 				option =scan.nextInt();
 				
 				
@@ -271,6 +271,5 @@ public class Login {
 		nm.login();
 		
 	}
-	
 	
 }
