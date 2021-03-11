@@ -15,12 +15,29 @@ class demo1
 	static Connection con;
 	static Statement st;
 	static Scanner scan;
+	static String name;
+	static int size,price;
 	
-	public static void buy()
+	public static void buy() throws SQLException, ClassNotFoundException
 	{
+		scan = new Scanner(System.in);
+		Class.forName("com.mysql.cj.jdbc.Driver");
+		con = DriverManager.getConnection(url, user, pass);
+
+		System.out.println("\nEnter item name to buy");
+		name=scan.nextLine();
 		
-		System.out.println("We buy goods Here");
+		System.out.println("\nEnter the quantity of the product");
+		size=scan.nextInt();
 		
+		System.out.println("\nEnter the price ");
+		price=scan.nextInt();
+		
+		
+		PreparedStatement st = con.prepareStatement("Update products set Pstock=(Pstock-?) where Pname='"+name+"'");
+		st.setInt(1, size);
+		st.executeUpdate();
+		System.out.println("The product has been bought successfully");
 		
 	}
 	
@@ -43,8 +60,8 @@ class demo1
 			while(rs.next())
 			{
 				
-				System.out.println("\nName   \t \t categories");
-				System.out.println("\n" + rs.getString(2) + " \t  " + rs.getString(4));
+				System.out.println("\nName   \t \t categories  \t  \t Pprice \tRemainingStock");
+				System.out.println("\n" + rs.getString(2) + "  \t  " + rs.getString(4) +"   \t \t "+ rs.getInt(3) +"\t \t \t "+ rs.getInt(5));
 				
 			}
 		}	
@@ -62,7 +79,8 @@ class demo1
 		
 		while(rs.next())
 		{
-			System.out.println("id \t Name \t \t Pprice \t Catagory \t Pstock  \t PDate");
+			System.out.println("\nid \t Name \t \t Pprice \t Catagory \t Pstock  \t PDate");
+			System.out.println("------------------------------------------------------------------------------------------");
 			System.out.println(rs.getInt("id") + "\t"+rs.getString("Pname") + "\t\t " +    rs.getInt("Pprice") +"\t \t " + rs.getString("Catagory") + "\t "+rs.getInt("Pstock") + "\t \t" +rs.getDate("Date"));
 		}
 		
@@ -87,13 +105,13 @@ public static void main(String args[]) throws ClassNotFoundException, SQLExcepti
 	 scan=new Scanner(System.in);
 	
 		do {
-				System.out.println("\n Supplier Menu"
+				System.out.println("\n \n  \t \t Customer Menu \n "
 						+ "\n1.List Items"
 						+ "\n2.Search Items"
 						+ "\n3.Buy item"
 						+ "\n4.Suggest item");
 			
-			System.out.println("Please make your suggestion");
+			System.out.println("\nPlease make your suggestion");
 			choice=scan.nextInt();
 			
 			switch(choice) {
