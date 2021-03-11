@@ -7,11 +7,14 @@ import java.util.*;
 class demo1
 {
 
-	static String url="jdbc:mysql://localhost/3306/inventory";
+	static String url="jdbc:mysql://localhost:3306/inventory";
 	static String user="root";
 	static String pass="";
+	static String query="select * from products";
+	static String result;
 	static Connection con;
 	static Statement st;
+	static Scanner scan;
 	
 	public static void buy()
 	{
@@ -22,22 +25,46 @@ class demo1
 	}
 	
 	
-	public static void search()
+	public static void search() throws SQLException, ClassNotFoundException
 	{
-	
-		System.out.println("We search goods Here");
+
+		{
+			
+			scan = new Scanner(System.in);
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			con = DriverManager.getConnection(url, user, pass);
+
+			PreparedStatement st = con.prepareStatement("select * from products where Pname=(?)");
+			System.out.println("Enter the item you need ");
+			String name=scan.nextLine();
+			st.setString(1, name);
+			ResultSet rs = st.executeQuery();
+			
+			while(rs.next())
+			{
+				
+				System.out.println("\nName   \t \t categories");
+				System.out.println("\n" + rs.getString(2) + " \t  " + rs.getString(4));
+				
+			}
+		}	
+		
 	}
 	
 	
 	public static void list() throws ClassNotFoundException, SQLException
 	{
 		
-		Class.forName("com.mysql.cj.jdbc");
+		Class.forName("com.mysql.cj.jdbc.Driver");
         con = DriverManager.getConnection(url, user, pass);
 		Statement st =con.createStatement();
+		ResultSet rs =st.executeQuery(query);
 		
-		
-		
+		while(rs.next())
+		{
+			System.out.println("id \t Name \t \t Pprice \t Catagory \t Pstock  \t PDate");
+			System.out.println(rs.getInt("id") + "\t"+rs.getString("Pname") + "\t\t " +    rs.getInt("Pprice") +"\t \t " + rs.getString("Catagory") + "\t "+rs.getInt("Pstock") + "\t \t" +rs.getDate("Date"));
+		}
 		
 	}
 	
