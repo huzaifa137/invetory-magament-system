@@ -8,7 +8,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Scanner;
 
-class demo1
+class demo2
 {
 
 	static String url="jdbc:mysql://localhost:3306/inventory";
