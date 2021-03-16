@@ -15,6 +15,7 @@ public class Login {
 	public static void swap() throws ClassNotFoundException, SQLException
 	{
 		suppliers sp = new suppliers();		
+		Customer cs = new Customer();
 		scan = new Scanner(System.in);
 		
 		
@@ -35,7 +36,9 @@ public class Login {
 				case 1:
 					sp.collect();
 					break;
-				
+				case 2:
+					cs.cust();
+					break;
 				}
 		}while(option!=-12);
 		

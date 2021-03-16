@@ -61,7 +61,8 @@ class demo1
 			{
 				
 				System.out.println("\nName   \t \t categories  \t  \t Pprice \tRemainingStock");
-				System.out.println("\n" + rs.getString(2) + "  \t  " + rs.getString(4) +"   \t \t "+ rs.getInt(3) +"\t \t \t "+ rs.getInt(5));
+				System.out.println("--------------------------------------------------------------------------------------------------------");;
+				System.out.println(rs.getString(2) + "  \t  " + rs.getString(4) +"   \t \t "+ rs.getInt(3) +"\t \t \t "+ rs.getInt(5));
 				
 			}
 		}	
@@ -97,43 +98,51 @@ class demo1
 public class Customer extends demo1 {
 
 	static Scanner scan;
+	
+	public void cust() throws SQLException, ClassNotFoundException
+	{
+		
+		int choice;
+		 scan=new Scanner(System.in);
+		
+			do {
+					System.out.println("\n \n  \t \t Customer Menu \n "
+							+ "\n1.List Items"
+							+ "\n2.Search Items"
+							+ "\n3.Buy item"
+							+ "\n4.Suggest item");
+				
+				System.out.println("\nPlease make your suggestion");
+				choice=scan.nextInt();
+				
+				switch(choice) {
+				
+				case 1:
+					list();
+					break;
+					
+				case 2:
+					search();
+					break;
+					
+				case 3:
+					buy();
+					break;
+				
+				case 4:
+					suggest();
+					break;
+					
+				}
+			}while(choice !=-1220012);
+		
+	}
    
 public static void main(String args[]) throws ClassNotFoundException, SQLException	
 {
 	
-	int choice;
-	 scan=new Scanner(System.in);
-	
-		do {
-				System.out.println("\n \n  \t \t Customer Menu \n "
-						+ "\n1.List Items"
-						+ "\n2.Search Items"
-						+ "\n3.Buy item"
-						+ "\n4.Suggest item");
-			
-			System.out.println("\nPlease make your suggestion");
-			choice=scan.nextInt();
-			
-			switch(choice) {
-			
-			case 1:
-				list();
-				break;
-				
-			case 2:
-				search();
-				break;
-				
-			case 3:
-				buy();
-				break;
-			
-			case 4:
-				suggest();
-				break;
-				
-			}
-		}while(choice !=-1220012);
+	Customer cs = new Customer();
+	cs.cust();
 	
 }
 	
