@@ -96,13 +96,13 @@ class demo1
 	
 		combine();
 		
-		System.out.println("\nSuggest an item to be bought in future");
+		System.out.println("\nSuggest an item to added in our stock");
 		name=scan.nextLine();
 		
 		Statement st = con.createStatement();
 		st.executeUpdate("insert into suggest (Product_name) values ('"+name+"')");
 		
-		System.out.println("\n Item has been addeded to the sugggested item list");
+		System.out.println("\nItem has been addeded to the sugggested item list");
 	}
 	
 }

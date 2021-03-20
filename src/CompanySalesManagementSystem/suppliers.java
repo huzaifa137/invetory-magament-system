@@ -29,8 +29,10 @@ class demo
 				
 				System.out.println("\n \t \t \t Supplier Details ");
 				
-				String table = rs.getInt(1) + " " + rs.getString(2) + " " + rs.getString(3) + " " + rs.getDate(4) + " " + rs.getInt(5);
-				System.out.println("\n " + table);
+				System.out.println("\nid \t Name  \t  catagory of goods\tDate of commodity \tAmount of products");
+				System.out.println("------------------------------------------------------------------------------------");
+				String table = rs.getInt(1)+ "\t" + rs.getString(2)+ "\t" + " \t" + rs.getString(3) + "\t" +"\t " + rs.getDate(4) + "\t \t " + rs.getInt(5);
+				System.out.println(table);
 				
 			}
 				} catch (ClassNotFoundException e) {
@@ -51,6 +53,7 @@ class demo
 			{
 				
 				System.out.println("\nSupplier'sname");
+				System.out.println("--------------");
 				System.out.println("\n" + rs.getString("name"));
 				
 			}
@@ -70,8 +73,9 @@ class demo
 			while(rs.next())
 			{
 				
-				System.out.println("\nName   \t \t categories");
-				System.out.println("\n" + rs.getString("name") + " \t  " + rs.getString("category_of_commodity"));
+				System.out.println("\nName \t categories");
+				System.out.println("---------------------");
+				System.out.println("\n" + rs.getString("name") + "\t  "+ rs.getString("category_of_commodity"));
 				
 			}
 		}	
@@ -90,7 +94,8 @@ class demo
 		{
 			
 			System.out.println("\nName \t categories \t Amount_of_products");
-			System.out.println("\n" + rs.getString("name") + "\t  " + rs.getString("category_of_commodity") + "\t \t \t" + rs.getInt("Amount_of_products"));
+			System.out.println("-----------------------------------------");
+			System.out.println(""+rs.getString("name") + "\t  " + rs.getString("category_of_commodity") + "\t \t \t" + rs.getInt("Amount_of_products"));
 		}
 	}
 	
