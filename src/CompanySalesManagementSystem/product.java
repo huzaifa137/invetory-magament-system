@@ -41,26 +41,26 @@ class demo2
 	}
 	
 	
-	public static  void add()
+	public static void add() throws ClassNotFoundException, SQLException
 	{
 		
 	
 	}
 	
-	public static void remove()
+	public static void remove()throws ClassNotFoundException, SQLException
 	{
 		
 	}
 	
-	public static void modify()
+	public static void modify()throws ClassNotFoundException, SQLException
 	{
+		
 		
 	}
 
 	public static void search() throws SQLException, ClassNotFoundException
 	{
 
-		{
 			
 			scan = new Scanner(System.in);
 			Class.forName("com.mysql.cj.jdbc.Driver");
@@ -79,14 +79,13 @@ class demo2
 				System.out.println("--------------------------------------------------------------------------------------------------------");;
 				System.out.println(rs.getString(2) + "  \t  " + rs.getString(4) +"   \t \t "+ rs.getInt(3) +"\t \t \t "+ rs.getInt(5));
 				
-			}
-		}	
-		
+			}	
 	}
 
+	
 }
 
-public class product extends demo1{
+public class product extends demo2{
 
 	public void pro() throws SQLException, ClassNotFoundException
 	{
@@ -96,7 +95,7 @@ public class product extends demo1{
 		 scan=new Scanner(System.in);
 		
 			do {
-					System.out.println("\n \n  \t \t Customer Menu \n "
+					System.out.println("\n \n  \t \t Product Menu \n "
 							+ "\n1.List Items"
 							+ "\n2.Add Item"
 							+ "\n3.remove item"
@@ -132,7 +131,8 @@ public class product extends demo1{
 	}
 		
 	
-	
+
+
 	public static void main(String args[]) throws SQLException, ClassNotFoundException
 	{
 		

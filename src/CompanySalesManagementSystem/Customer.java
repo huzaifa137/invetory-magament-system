@@ -18,11 +18,17 @@ class demo1
 	static String name;
 	static int size,price;
 	
-	public static void buy() throws SQLException, ClassNotFoundException
+	public static  void combine() throws ClassNotFoundException, SQLException
 	{
 		scan = new Scanner(System.in);
 		Class.forName("com.mysql.cj.jdbc.Driver");
 		con = DriverManager.getConnection(url, user, pass);
+	}
+	
+	public static void buy() throws SQLException, ClassNotFoundException
+	{
+		
+		combine();
 
 		System.out.println("\nEnter item name to buy");
 		name=scan.nextLine();
@@ -47,10 +53,8 @@ class demo1
 
 		{
 			
-			scan = new Scanner(System.in);
-			Class.forName("com.mysql.cj.jdbc.Driver");
-			con = DriverManager.getConnection(url, user, pass);
-
+			combine();
+			
 			PreparedStatement st = con.prepareStatement("select * from products where Pname=(?)");
 			System.out.println("Enter the item you need ");
 			String name=scan.nextLine();
@@ -73,9 +77,8 @@ class demo1
 	public static void list() throws ClassNotFoundException, SQLException
 	{
 		
-		Class.forName("com.mysql.cj.jdbc.Driver");
-        con = DriverManager.getConnection(url, user, pass);
-		Statement st =con.createStatement();
+		combine();
+	    st =con.createStatement();
 		ResultSet rs =st.executeQuery(query);
 		
 		while(rs.next())
@@ -88,9 +91,18 @@ class demo1
 	}
 	
 
-	public static void suggest()
+	public static void suggest() throws ClassNotFoundException, SQLException
 	{
-		System.out.println("We suggest goods Here");
+	
+		combine();
+		
+		System.out.println("\nSuggest an item to be bought in future");
+		name=scan.nextLine();
+		
+		Statement st = con.createStatement();
+		st.executeUpdate("insert into suggest (Product_name) values ('"+name+"')");
+		
+		System.out.println("\n Item has been addeded to the sugggested item list");
 	}
 	
 }
@@ -132,8 +144,9 @@ public class Customer extends demo1 {
 				case 4:
 					suggest();
 					break;
-					
+			
 				}
+			
 			}while(choice !=-1220012);
 		
 	}

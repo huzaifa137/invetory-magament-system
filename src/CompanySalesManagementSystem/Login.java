@@ -33,12 +33,13 @@ public class Login {
 				
 				switch(option)
 				{
-				case 1:
+				case 3:
 					sp.collect();
 					break;
 				case 2:
 					cs.cust();
 					break;
+				
 				}
 		}while(option!=-12);
 		
