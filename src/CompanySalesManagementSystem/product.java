@@ -22,6 +22,12 @@ class demo2
 	static String name;
 	static int size,price;
 	
+	public static  void combine() throws ClassNotFoundException, SQLException
+	{
+		scan = new Scanner(System.in);
+		Class.forName("com.mysql.cj.jdbc.Driver");
+		con = DriverManager.getConnection(url, user, pass);
+	}
 	
 	public static void list() throws ClassNotFoundException, SQLException
 	{
@@ -40,10 +46,30 @@ class demo2
 		
 	}
 	
-	
 	public static void add() throws ClassNotFoundException, SQLException
 	{
+		combine();
 		
+		System.out.println("\n\t \t \t Add new product in stock\n");
+		
+		System.out.println("Enter product name");
+		name=scan.nextLine();
+	
+		System.out.println("Enter product price");
+		int price=scan.nextInt();
+		
+		System.out.println("Enter catagory for product");
+		String cat=scan.next();
+		
+		System.out.println("Enter the amount of stock");
+		int stock=scan.nextInt();
+		
+		long millis=System.currentTimeMillis();  
+        java.sql.Date date=new java.sql.Date(millis);  
+		Statement st = con.createStatement();
+		st.executeUpdate("insert into products (Pname,Pprice,Catagory,Pstock,Date) values ('"+name+"','"+price+"','"+cat+"','"+stock+"','"+date+"')");
+		
+		System.out.println("\nItem has been addeded to the sugggested item list");
 	
 	}
 	
@@ -82,7 +108,6 @@ class demo2
 			}	
 	}
 
-	
 }
 
 public class product extends demo2{
@@ -131,7 +156,6 @@ public class product extends demo2{
 	}
 		
 	
-
 
 	public static void main(String args[]) throws SQLException, ClassNotFoundException
 	{
