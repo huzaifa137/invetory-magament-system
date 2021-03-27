@@ -47,7 +47,6 @@ class demo1
 		
 	}
 	
-	
 	public static void search() throws SQLException, ClassNotFoundException
 	{
 
@@ -73,7 +72,6 @@ class demo1
 		
 	}
 	
-	
 	public static void list() throws ClassNotFoundException, SQLException
 	{
 		
@@ -81,16 +79,15 @@ class demo1
 	    st =con.createStatement();
 		ResultSet rs =st.executeQuery(query);
 		
+		System.out.println("\nid \t Name \t \t Pprice \t Catagory \t Pstock  \t PDate");
+		System.out.println("------------------------------------------------------------------------------------------");
 		while(rs.next())
 		{
-			System.out.println("\nid \t Name \t \t Pprice \t Catagory \t Pstock  \t PDate");
-			System.out.println("------------------------------------------------------------------------------------------");
 			System.out.println(rs.getInt("id") + "\t"+rs.getString("Pname") + "\t\t " +    rs.getInt("Pprice") +"\t \t " + rs.getString("Catagory") + "\t "+rs.getInt("Pstock") + "\t \t" +rs.getDate("Date"));
 		}
 		
 	}
 	
-
 	public static void suggest() throws ClassNotFoundException, SQLException
 	{
 	
@@ -104,17 +101,16 @@ class demo1
 		
 		System.out.println("\nItem has been addeded to the sugggested item list");
 	}
-	
+
 }
 
-public class Customer extends demo1 {
-
-	static Scanner scan;
+	public class Customer extends demo1 {
 	
 	public void cust() throws SQLException, ClassNotFoundException
 	{
 		
 		int choice;
+		 
 		 scan=new Scanner(System.in);
 		
 			do {
@@ -151,7 +147,7 @@ public class Customer extends demo1 {
 		
 	}
    
-public static void main(String args[]) throws ClassNotFoundException, SQLException	
+	public static void main(String args[]) throws ClassNotFoundException, SQLException	
 {
 	
 	Customer cs = new Customer();

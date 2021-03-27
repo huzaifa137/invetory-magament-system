@@ -15,19 +15,126 @@ class demo2
 	static String user="root";
 	static String pass="";
 	static String query="select * from products";
-	static String result;
-	static Connection con;
-	static Statement st;
 	static Scanner scan;
 	static String name;
+	static Statement st;
+	static Connection con;
 	static int size,price;
+	
 	
 	public static  void combine() throws ClassNotFoundException, SQLException
 	{
 		scan = new Scanner(System.in);
 		Class.forName("com.mysql.cj.jdbc.Driver");
 		con = DriverManager.getConnection(url, user, pass);
+		
 	}
+	
+	private static void name()
+	{
+	
+		try {
+			combine();
+			
+			System.out.println("Enter id to modify");
+			size=scan.nextInt();
+			
+			System.out.println("Enter the new product name:");
+			name=scan.next();
+			
+			Statement st = con.createStatement();
+			st.executeUpdate("update products set pname='"+name+"' where id='"+size+"'");
+			
+			System.out.println("\nThe item has been modified successfully");
+			
+			
+		} catch (ClassNotFoundException | SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	private static void price()
+
+	{
+		try {
+			combine();
+			
+			System.out.println("Enter id to modify");
+			size=scan.nextInt();
+			
+			System.out.println("Enter the new price for item:");
+			price=scan.nextInt();
+			
+			Statement st = con.createStatement();
+			st.executeUpdate("update products set Pprice='"+price+"' where id='"+size+"'");
+			
+			System.out.println("\nThe item has been modified successfully");
+			
+			
+		} catch (ClassNotFoundException | SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
+	private static void stock() 
+{
+		
+		try {
+			combine();
+			
+			System.out.println("Enter id to modify");
+			size=scan.nextInt();
+			
+			System.out.println("Enter amount of new stock for item:");
+			price=scan.nextInt();
+			
+			Statement st = con.createStatement();
+			st.executeUpdate("update products set Pstock='"+price+"' where id='"+size+"'");
+			
+			System.out.println("\nThe item has been modified successfully");
+			
+			
+		} catch (ClassNotFoundException | SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	private static void catagory() throws ClassNotFoundException, SQLException
+	{
+		
+		combine();
+		
+		System.out.println("Enter id to modify");
+		size=scan.nextInt();
+		
+		System.out.println("Enter the new catagory for item:");
+		name=scan.next();
+		
+		Statement st = con.createStatement();
+		st.executeUpdate("update products set catagory='"+name+"' where id='"+size+"'");
+		
+		System.out.println("\nThe item has been modified successfully");
+		
+	}
+	
+	private static void prods() throws ClassNotFoundException, SQLException
+	{
+
+		Class.forName("com.mysql.cj.jdbc.Driver");
+        con = DriverManager.getConnection(url, user, pass);
+		Statement st =con.createStatement();
+		ResultSet rs =st.executeQuery(query);
+		
+			System.out.println("\n\nid \t Name \t \t Pprice \t Catagory \t Pstock  \t PDate");
+			System.out.println("------------------------------------------------------------------------------------------");
+		while(rs.next())
+		{
+			
+			
+			System.out.println(rs.getInt("id") + "\t"+rs.getString("Pname") + "\t\t " +    rs.getInt("Pprice") +"\t \t " + rs.getString("Catagory") + "\t "+rs.getInt("Pstock") + "\t \t" +rs.getDate("Date"));
+		
+	}
+}
 	
 	public static void list() throws ClassNotFoundException, SQLException
 	{
@@ -37,10 +144,12 @@ class demo2
 		Statement st =con.createStatement();
 		ResultSet rs =st.executeQuery(query);
 		
-		while(rs.next())
-		{
 			System.out.println("\nid \t Name \t \t Pprice \t Catagory \t Pstock  \t PDate");
 			System.out.println("------------------------------------------------------------------------------------------");
+		while(rs.next())
+		{
+			
+			
 			System.out.println(rs.getInt("id") + "\t"+rs.getString("Pname") + "\t\t " +    rs.getInt("Pprice") +"\t \t " + rs.getString("Catagory") + "\t "+rs.getInt("Pstock") + "\t \t" +rs.getDate("Date"));
 		}
 		
@@ -52,8 +161,8 @@ class demo2
 		
 		System.out.println("\n\t \t \t Add new product in stock\n");
 		
-		System.out.println("Enter product name");
-		name=scan.nextLine();
+		System.out.println("Enter product name :");
+		name=scan.next();
 	
 		System.out.println("Enter product price");
 		int price=scan.nextInt();
@@ -76,11 +185,56 @@ class demo2
 	public static void remove()throws ClassNotFoundException, SQLException
 	{
 		
+		combine();
+		
+		System.out.println("\nEnter product name to be removed");
+		name=scan.nextLine();
+	
+		Statement st = con.createStatement();
+		st.executeUpdate("Delete from products where pname='"+name+"'");
+		System.out.println("\n Item has been removed successfully");
 	}
 	
 	public static void modify()throws ClassNotFoundException, SQLException
 	{
 		
+		
+		int id;
+		combine();
+		
+	
+		
+		do
+		{
+			System.out.println("\n\t \t Modify Menu \n"
+					+ "\n1.Modify name"
+					+ "\n2.Modify price"
+					+ "\n3.Modify catagory"
+					+ "\n4.Modify stock"
+					+ "\n5.Display products details");
+		
+			System.out.println("\nChoose the choice you wish to modify");
+			id=scan.nextInt();
+			
+			switch(id) {
+			
+			case 1:
+				name();
+				break;
+			case 2:
+				price();
+				break;
+			case 3:
+				catagory();
+				break;
+			case 4:
+				stock();
+				break;
+			case 5:
+				prods();
+				break;
+			}
+		}while(id!=138334);
 		
 	}
 
@@ -106,12 +260,11 @@ class demo2
 				System.out.println(rs.getString(2) + "  \t  " + rs.getString(4) +"   \t \t "+ rs.getInt(3) +"\t \t \t "+ rs.getInt(5));
 				
 			}	
-	}
-
+		}
 }
 
-public class product extends demo2{
-
+ 	public class product extends demo2{
+ 		
 	public void pro() throws SQLException, ClassNotFoundException
 	{
 		
@@ -154,14 +307,13 @@ public class product extends demo2{
 				}
 			}while(choice !=-1220012);
 	}
-		
-	
 
 	public static void main(String args[]) throws SQLException, ClassNotFoundException
 	{
 		
 		product pr = new product();
 		pr.pro();
+	
 		
 	}
 }

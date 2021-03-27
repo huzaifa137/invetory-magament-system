@@ -13,6 +13,7 @@ class demo
 	static String query="Select name from suppliers"; 
 	static Connection con;
 	static Scanner scan;
+	static int choice;
 	
 	public static void suppliertable() throws SQLException
 	{
@@ -97,16 +98,40 @@ class demo
 			System.out.println("-----------------------------------------");
 			System.out.println(""+rs.getString("name") + "\t  " + rs.getString("category_of_commodity") + "\t \t \t" + rs.getInt("Amount_of_products"));
 		}
-	}
+ 	}
 	
-}
+	public static void addproduct() throws SQLException
+	{
+
+		System.out.println("\n\t \t \t Add new product in stock\n");
+		
+		System.out.println("Enter product name :");
+		name=scan.next();
+	
+		System.out.println("Enter product price");
+		int price=scan.nextInt();
+		
+		System.out.println("Enter catagory for product");
+		String cat=scan.next();
+		
+		System.out.println("Enter the amount of stock");
+		int stock=scan.nextInt();
+		
+		long millis=System.currentTimeMillis();  
+        java.sql.Date date=new java.sql.Date(millis);  
+		Statement st = con.createStatement();
+		st.executeUpdate("insert into products (Pname,Pprice,Catagory,Pstock,Date) values ('"+name+"','"+price+"','"+cat+"','"+stock+"','"+date+"')");
+		
+		System.out.println("\nItem has been addeded to the sugggested item list");
+	
+		
+	}
+
+ }
+	
 
 public class suppliers extends demo {
 	
-		static Scanner scan;
-		static int choice;
-		
-		
 		public void collect() throws SQLException, ClassNotFoundException
 		{
 			
@@ -118,7 +143,8 @@ public class suppliers extends demo {
 						+ "\n 1. view all supplier Details"
 						+ "\n 2. View Supplier's Name"
 						+ "\n 3. view supplier sales catagories"
-						+ "\n 4. Amount of goods per Supplier");
+						+ "\n 4. Amount of goods per Supplier"
+						+ "\n 5. Add product");
 				
 				System.out.println("\n \n \t \tMake a choice from the Above");
 				choice = scan.nextInt();
@@ -140,7 +166,10 @@ public class suppliers extends demo {
 				case 4:
 					number_of_products();
 					break;
-				
+				case 5:
+					addproduct();
+					break;
+					
 				default :System.out.println("Please make a correct Selection !!!");
 					
 				}
@@ -150,7 +179,6 @@ public class suppliers extends demo {
 			
 		}
 		
-		
 		public static void main(String args[]) throws ClassNotFoundException, SQLException
 		{
 			
@@ -158,5 +186,3 @@ public class suppliers extends demo {
 			nm.collect();
 	}
 }
-
-
