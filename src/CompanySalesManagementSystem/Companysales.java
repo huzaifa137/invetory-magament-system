@@ -5,7 +5,6 @@ import java.sql.*;
 import java.util.*;
 
 
-
 class demo3
 {
 	static String url="jdbc:mysql://localhost:3306/inventory";
