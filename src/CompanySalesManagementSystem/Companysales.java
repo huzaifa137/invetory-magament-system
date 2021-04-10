@@ -16,6 +16,9 @@ class demo3
 	static Connection con;
 	
 	
+/*
+ 	*This dsiplays the view and all the products that are being stored
+ */
 	public static void view() throws ClassNotFoundException, SQLException
 	{
 		
@@ -30,11 +33,12 @@ class demo3
 		{
 			
 			System.out.println(rs.getInt("id") + "\t"+rs.getString("name") + "\t\t " +    rs.getInt("remainigquantity") + "\t \t \t" + rs.getDate("Date"));
-		
 		}
-
 	}
 	
+	/*
+	 *This is modifying the name of the companysales in the table 
+	 */
 	public static void name() throws ClassNotFoundException, SQLException{
 
 		
@@ -55,6 +59,9 @@ class demo3
 		System.out.println("\nThe item has been modified successfully");
 	}
 	
+	/*
+	 *This is modifying the reamining quantities  of the companysales in the table 
+	 */
 	public static void quantitysales() throws ClassNotFoundException, SQLException {
 		
 		scan =new Scanner(System.in);
@@ -74,6 +81,10 @@ class demo3
 		System.out.println("\nThe sales have been modified successfully");
 	}
 	
+	/*
+	 *This actual logic for modifying all the above methods
+	 *which are being implemented above.
+	 */
 	public void modifysales()throws ClassNotFoundException, SQLException
 	{
 		
@@ -101,7 +112,8 @@ class demo3
 			case 2:
 				System.out.println("\n\t \t Modfiy Menu \n"
 						+ "\n1.Modify name"
-						+ "\n2.Modify remainingSales");
+						+ "\n2.Modify remainingSales"
+						+ "\n3.Exit");
 				
 				int id2=scan.nextInt();
 				if(id2==1) {
@@ -121,9 +133,11 @@ class demo3
 	}
 }
 
-
 public class Companysales extends demo3{
 
+	/*
+	*Running the main Companysales and all it's methods implemented in the above
+	 */
 	public static void main(String args[]) throws ClassNotFoundException, SQLException
 	{
 		Companysales cs = new Companysales();

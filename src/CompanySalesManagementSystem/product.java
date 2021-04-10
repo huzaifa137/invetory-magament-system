@@ -21,15 +21,22 @@ class demo2
 	static Connection con;
 	static int size,price;
 	
-	
+	/*
+	*Combine method does contain all the commonly used 
+	 *statements,connections and the scanner class
+	 *which is just implemented in the different methods 
+	 *belw it.
+	 */ 
 	public static  void combine() throws ClassNotFoundException, SQLException
 	{
 		scan = new Scanner(System.in);
 		Class.forName("com.mysql.cj.jdbc.Driver");
-		con = DriverManager.getConnection(url, user, pass);
-		
+		con = DriverManager.getConnection(url, user, pass);	
 	}
 	
+	/*
+	*Its' for modifying the name of the products
+	 */
 	private static void name()
 	{
 	
@@ -53,8 +60,10 @@ class demo2
 		}
 	}
 	
+	/*
+	*Its' for modifying the price of the products
+	 */
 	private static void price()
-
 	{
 		try {
 			combine();
@@ -75,7 +84,10 @@ class demo2
 			e.printStackTrace();
 		}
 	}
-
+	
+	/*
+	*Its' for modifying the stock of the products
+	 */
 	private static void stock() 
 {
 		
@@ -99,6 +111,9 @@ class demo2
 		}
 	}
 	
+	/*
+	*Its' for modifying the catagory of the products
+	 */
 	private static void catagory() throws ClassNotFoundException, SQLException
 	{
 		
@@ -117,6 +132,9 @@ class demo2
 		
 	}
 	
+	/*
+	*Its' for displaying the whole products on the table.
+	 */
 	private static void prods() throws ClassNotFoundException, SQLException
 	{
 
@@ -136,6 +154,9 @@ class demo2
 	}
 }
 	
+	/*
+	*Its' for displaying the list of  products on the table.
+	 */
 	public static void list() throws ClassNotFoundException, SQLException
 	{
 		
@@ -155,6 +176,10 @@ class demo2
 		
 	}
 	
+	/*
+	*Its' for adding different items in the products
+	 *like id, name ,product and others.
+	 */
 	public static void add() throws ClassNotFoundException, SQLException
 	{
 		combine();
@@ -182,6 +207,9 @@ class demo2
 	
 	}
 	
+	/*
+	*Its' for removing a specified a product from the table
+	 */
 	public static void remove()throws ClassNotFoundException, SQLException
 	{
 		
@@ -195,6 +223,9 @@ class demo2
 		System.out.println("\n Item has been removed successfully");
 	}
 	
+	/*
+	*Its' for modfying a specified a product from the table
+	 */
 	public static void modify()throws ClassNotFoundException, SQLException
 	{
 		
@@ -211,7 +242,8 @@ class demo2
 					+ "\n2.Modify price"
 					+ "\n3.Modify catagory"
 					+ "\n4.Modify stock"
-					+ "\n5.Display products details");
+					+ "\n5.Display products details"
+					+ "\n6 Exit");
 		
 			System.out.println("\nChoose the choice you wish to modify");
 			id=scan.nextInt();
@@ -234,10 +266,13 @@ class demo2
 				prods();
 				break;
 			}
-		}while(id!=138334);
+		}while(id != 6);
 		
 	}
-
+ 
+	/*
+	*Its' for searching for  a specified a product in the table
+	 */
 	public static void search() throws SQLException, ClassNotFoundException
 	{
 
@@ -265,6 +300,10 @@ class demo2
 
  	public class product extends demo2{
  		
+ 	/*
+ 	*This method does control the menu which will control 
+ 	*the whole execution of the program in this module.
+ 	*/
 	public void pro() throws SQLException, ClassNotFoundException
 	{
 		
@@ -278,7 +317,8 @@ class demo2
 							+ "\n2.Add Item"
 							+ "\n3.remove item"
 							+ "\n4.Modify item"
-							+ "\n5.Search item");
+							+ "\n5.Search item"
+							+ "\n6.Exit");
 				
 				System.out.println("\nPlease make your suggestion");
 				choice=scan.nextInt();
@@ -305,9 +345,12 @@ class demo2
 					break;
 					
 				}
-			}while(choice !=-1220012);
+			}while(choice !=6);
 	}
 
+	/*
+	*The main method
+	*/
 	public static void main(String args[]) throws SQLException, ClassNotFoundException
 	{
 		

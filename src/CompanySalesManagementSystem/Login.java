@@ -18,13 +18,19 @@ public class Login {
 	static Statement st;
 	static int option,flag=0;
 	
+	/*
+	 *Swap is the is the main method, and does contain
+	 *all the messages that are displayed on the general
+	 *screen. 
+	 */
 	public static void swap() throws ClassNotFoundException, SQLException
 	{
+		
+		Companysales cs = new Companysales();
+		Accounting acc = new Accounting();
 		suppliers sp = new suppliers();		
 		Customer cst = new Customer();
 		product pr = new product();
-		
-		
 		
 		do{
 			
@@ -55,15 +61,27 @@ public class Login {
 				case 3:
 					pr.pro();
 					break;
+					
+				case 4:
+					cs.modifysales();
+					break;
+					
+				case 5:
+					acc.work();
+					break;
+					
 				case 6:
 					managesystemusers();
 					break;
 				
 				}
-		}while(option!=7);
+		}while(option != 7);
 		System.out.println("\t \t \t *** Thank you *** ");
 	}
 	
+/*
+ *This is depicts the Admin login module and it's used to login 
+ */	
 	public static void Admin() throws ClassNotFoundException, SQLException {
 		
 		scan = new Scanner(System.in);
@@ -95,6 +113,9 @@ public class Login {
 		con.close();
 	}
 	
+/*
+ *This is depicts the Suppplier login module and it's used to login 
+ */
 	public static void supplier() throws ClassNotFoundException, SQLException
 	{
 		
@@ -127,7 +148,10 @@ public class Login {
 		
 		con.close();
 	}
-	
+
+/*
+ *This is depicts the customer login module and it's used to login 
+ */
 	public static void customer() throws SQLException, ClassNotFoundException
 
 	{
@@ -160,15 +184,17 @@ public class Login {
 		
 		con.close();
 	}
-	
+		
+/*
+ *This is depicts the customer registration login module and it's used to login 
+ */
 	private static void custreg() throws SQLException, ClassNotFoundException {
 		
 		scan = new Scanner(System.in);
 		Class.forName("com.mysql.cj.jdbc.Driver");
 		con = DriverManager.getConnection(url, user, pass);
 		
-		System.out.println("Enter login criteria");
-		type=scan.next();
+		String type="customer";
 		
 		System.out.println("Enter customer name :");
 		id=scan.next();
@@ -192,7 +218,10 @@ public class Login {
 		}
 		
 	}
-	
+		
+/*
+ *This is depicts the Admin registration login module and it's used to login 
+ */
 	private static void Admireg() throws ClassNotFoundException, SQLException {
 		scan = new Scanner(System.in);
 		Class.forName("com.mysql.cj.jdbc.Driver");
@@ -224,6 +253,9 @@ public class Login {
 		
 	}
 
+/*
+ *This is depicts the Supplier registration login module and it's used to login 
+ */
 	private static void suppreg() throws SQLException, ClassNotFoundException {
 		
 		scan = new Scanner(System.in);
@@ -256,6 +288,9 @@ public class Login {
 		
 	}
 	
+/*
+ *This is module does run all and manage all the system users
+ */
 	public static void managesystemusers() throws ClassNotFoundException, SQLException
 	{
 	
@@ -277,7 +312,8 @@ public class Login {
 				System.out.println("\n \t \t \t MENU \n "
 						+ "\n 1.Add Admin"
 						+ "\n 2.Add Supplier"
-						+ "\n 3.Add Customer");
+						+ "\n 3.Add Customer"
+						+ "\n 4.Exit");
 				
 				System.out.println("\n Select catagory");
 				option =scan.nextInt();
@@ -298,7 +334,7 @@ public class Login {
 					break;
 					
 				}
-		}while(option!=-12);
+		}while(option != 4);
 	}
 
 			else if(num==2)
@@ -423,7 +459,10 @@ public class Login {
 			}
 	}
 	
-	
+/*
+ *This is does control all the major and does register new customer and 
+ *it's the first screen to be showed on. 
+ */
 	public void login()
 	{
 		
@@ -433,7 +472,8 @@ public class Login {
 			
 			do
 			{
-				
+			
+				System.out.println("\n\n \t \t*** COMPANY SALES MANAGEMENT SYSTEM ***");
 				System.out.println("\n \t \t \t Login As  ");
 				System.out.println("\n 1.Admin"
 						+ "\n 2.Supplier"
@@ -463,7 +503,7 @@ public class Login {
 					break;
 				}
 				
-			}while(option!=-137);
+			}while(option != -903120.0);
 			System.out.println(" Please make a selection from the above !!!");
 		}
 
