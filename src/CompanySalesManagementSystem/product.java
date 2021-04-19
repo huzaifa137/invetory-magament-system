@@ -43,16 +43,20 @@ class demo2
 		try {
 			combine();
 			
-			System.out.println("Enter id to modify");
-			size=scan.nextInt();
+			System.out.println("Enter name of product to modify");
+			String name2=scan.next();
 			
 			System.out.println("Enter the new product name:");
-			name=scan.next();
+			String name1=scan.next();
 			
 			Statement st = con.createStatement();
-			st.executeUpdate("update products set pname='"+name+"' where id='"+size+"'");
+			//st.executeUpdate("update products set pname='"+name1+"' where id='"+size+"'");
+			st.executeUpdate("update products set Pname='"+name1+"' where Pname='"+name2+"'");
+			
+			st.executeUpdate("Update suppliers set Pname='"+name1+"' where Pname='"+name2+"'");
 			
 			System.out.println("\nThe item has been modified successfully");
+			
 			
 			
 		} catch (ClassNotFoundException | SQLException e) {
@@ -94,16 +98,20 @@ class demo2
 		try {
 			combine();
 			
-			System.out.println("Enter id to modify");
-			size=scan.nextInt();
+			System.out.println("Enter name of product to modify");
+			String name2=scan.next();
+			
 			
 			System.out.println("Enter amount of new stock for item:");
-			price=scan.nextInt();
+			int price=scan.nextInt();
 			
 			Statement st = con.createStatement();
-			st.executeUpdate("update products set Pstock='"+price+"' where id='"+size+"'");
+			st.executeUpdate("update suppliers set Amount_of_products='"+price+"' where Pname='"+name2+"'");
+			
+			st.executeUpdate("update products set Pstock='"+price+"' where Pname='"+name2+"'");
 			
 			System.out.println("\nThe item has been modified successfully");
+			
 			
 			
 		} catch (ClassNotFoundException | SQLException e) {
@@ -119,40 +127,22 @@ class demo2
 		
 		combine();
 		
-		System.out.println("Enter id to modify");
-		size=scan.nextInt();
+		System.out.println("Enter name of product to modify");
+		String name2=scan.next();
+		
 		
 		System.out.println("Enter the new catagory for item:");
-		name=scan.next();
+		String name1=scan.next();
 		
 		Statement st = con.createStatement();
-		st.executeUpdate("update products set catagory='"+name+"' where id='"+size+"'");
+		st.executeUpdate("update suppliers set category_of_commodity='"+name1+"' where Pname='"+name2+"'");
+		
+		st.executeUpdate("update products set catagory='"+name1+"' where Pname='"+name2+"'");
 		
 		System.out.println("\nThe item has been modified successfully");
 		
 	}
 	
-	/*
-	*Its' for displaying the whole products on the table.
-	 */
-	private static void prods() throws ClassNotFoundException, SQLException
-	{
-
-		Class.forName("com.mysql.cj.jdbc.Driver");
-        con = DriverManager.getConnection(url, user, pass);
-		Statement st =con.createStatement();
-		ResultSet rs =st.executeQuery(query);
-		
-			System.out.println("\n\nid \t Name \t \t Pprice \t Catagory \t Pstock  \t PDate");
-			System.out.println("------------------------------------------------------------------------------------------");
-		while(rs.next())
-		{
-			
-			
-			System.out.println(rs.getInt("id") + "\t"+rs.getString("Pname") + "\t\t " +    rs.getInt("Pprice") +"\t \t " + rs.getString("Catagory") + "\t "+rs.getInt("Pstock") + "\t \t" +rs.getDate("Date"));
-		
-	}
-}
 	
 	/*
 	*Its' for displaying the list of  products on the table.
@@ -171,7 +161,7 @@ class demo2
 		{
 			
 			
-			System.out.println(rs.getInt("id") + "\t"+rs.getString("Pname") + "\t\t " +    rs.getInt("Pprice") +"\t \t " + rs.getString("Catagory") + "\t "+rs.getInt("Pstock") + "\t \t" +rs.getDate("Date"));
+			System.out.println(rs.getInt("id") + "\t"+rs.getString("Pname") + "\t\t " +    rs.getInt("Pprice") +"\t \t " + rs.getString("Catagory") + "\t \t "+rs.getInt("Pstock") + "\t \t" +rs.getDate("Date"));
 		}
 		
 	}
@@ -220,6 +210,7 @@ class demo2
 	
 		Statement st = con.createStatement();
 		st.executeUpdate("Delete from products where pname='"+name+"'");
+		st.executeUpdate("Delete from suppliers where Pname='"+name+"'");
 		System.out.println("\n Item has been removed successfully");
 	}
 	
@@ -263,11 +254,10 @@ class demo2
 				stock();
 				break;
 			case 5:
-				prods();
+				list();
 				break;
 			}
 		}while(id != 6);
-		
 	}
  
 	/*
@@ -346,6 +336,7 @@ class demo2
 					
 				}
 			}while(choice !=6);
+			System.out.println("\t \t \t *** Thank you ***");
 	}
 
 	/*

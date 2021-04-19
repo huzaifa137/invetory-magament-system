@@ -13,7 +13,7 @@ class demo1
 	static String query="select * from products";
 	static String result;
 	static Connection con;
-	static Statement st,st1;
+	static Statement st,st1,st2;
 	static Scanner scan;
 	static String name;
 	static int size,price;
@@ -39,12 +39,6 @@ class demo1
 		System.out.println("\nEnter the quantity of the product");
 		size=scan.nextInt();
 		
-//		System.out.println("\nEnter the price ");
-//		price=scan.nextInt();
-		
-		
-	
-		
 		PreparedStatement st = con.prepareStatement("Update products set Pprice=(Pprice*?) where Pname='"+name+"'");
 		st.setInt(1, size);
 		st.executeUpdate();
@@ -55,7 +49,7 @@ class demo1
 		int dons = rs.getInt("Pprice");
 		
 		
-		System.out.println( dons +"₹"+"\t is total amount to purchase selected goods\n"
+		System.out.println( dons +"₹"+"\t is total amount needed to purchase selected goods\n"
 				+ "\nDo you wish to continue and purchace the products?"
 				+ "\nPress y to purchase or n to cancel order ");
 		
@@ -65,22 +59,33 @@ class demo1
 		if(x == 'y' || x== 'Y')
 		{
 			System.out.println("Purchase Succesfully done");
+			PreparedStatement st1 = con.prepareStatement("Update products set Pprice=((Pprice/?)) where Pname='"+name+"'");
+			st1.setInt(1, size);
+			st1.executeUpdate();
+			
+			PreparedStatement st2 = con.prepareStatement("Update products set Pstock=(Pstock-?) where Pname='"+name+"'");
+			st2.setInt(1, size);
+			st2.executeUpdate();
+			System.out.println("\nThe product has been bought successfully");
 		}
 		else if(x == 'n' || x== 'N')
 		{
 			System.out.println("The purchase is cancelled");
+			PreparedStatement st1 = con.prepareStatement("Update products set Pprice=((Pprice/?)) where Pname='"+name+"'");
+			st1.setInt(1, size);
+			st1.executeUpdate();
+			
 		}
 		
 		else
 		{
 			System.out.println("Wrong seleection");
+			System.out.println("The purchase is cancelled");
+			PreparedStatement st1 = con.prepareStatement("Update products set Pprice=((Pprice/?)) where Pname='"+name+"'");
+			st1.setInt(1, size);
+			st1.executeUpdate();
+			
 		}
-		
-		System.out.println("Completed ....");
-		
-		PreparedStatement st1 = con.prepareStatement("Update products set Pprice=((Pprice/?)) where Pname='"+name+"'");
-		st1.setInt(1, size);
-		st1.executeUpdate();
 		
 	}
 	
@@ -100,11 +105,10 @@ class demo1
 			st.setString(1, name);
 			ResultSet rs = st.executeQuery();
 			
-			while(rs.next())
-			{
-				
 				System.out.println("\nName   \t \t categories  \t  \t Pprice \tRemainingStock");
 				System.out.println("--------------------------------------------------------------------------------------------------------");;
+			while(rs.next())
+			{
 				System.out.println(rs.getString(2) + "  \t  " + rs.getString(4) +"   \t \t "+ rs.getInt(3) +"\t \t \t "+ rs.getInt(5));
 				
 			}

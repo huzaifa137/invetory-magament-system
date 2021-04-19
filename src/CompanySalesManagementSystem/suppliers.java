@@ -3,6 +3,7 @@ package CompanySalesManagementSystem;
 import java.sql.*;
 import java.util.*;
 
+
 class demo
 {
 	
@@ -37,11 +38,11 @@ class demo
 			
 			System.out.println("\n \t \t \t Supplier Details ");
 			
-				System.out.println("\nid \t Name  \t  catagory of goods\tDate of commodity \tAmount of products");
-				System.out.println("------------------------------------------------------------------------------------");
+				System.out.println("\nid \t SupplierName \t Pname \t Category_of_goods\tDate of commodity \tAmount of products");
+				System.out.println("---------------------------------------------------------------------------------------------");
 			while(rs.next())
 			{
-				String table = rs.getInt(1)+ "\t" + rs.getString(2)+ "\t" + " \t" + rs.getString(3) + "\t" +"\t " + rs.getDate(4) + "\t \t " + rs.getInt(5);
+				String table = rs.getInt("id")+ "\t" + rs.getString("Name")+ "\t" + " \t" + rs.getString("Pname")+ "\t" + " \t" + rs.getString("category_of_commodity") + "\t" +"\t " + rs.getDate("Date_of_Commodity") + "\t \t " + rs.getInt("Amount_of_products");
 				System.out.println(table);
 				
 			}
@@ -56,15 +57,17 @@ class demo
 		try {
 			combine();
 			
-			System.out.println("Enter id to modify");
-			int size=scan.nextInt();
+			System.out.println("Enter name of product to modify");
+			String name2=scan.next();
 			
 			System.out.println("Enter the new product name:");
 			String name1=scan.next();
 			
 			Statement st = con.createStatement();
 			//st.executeUpdate("update products set pname='"+name1+"' where id='"+size+"'");
-			st.executeUpdate("update suppliers set category_of_commodity='"+name1+"' where id='"+size+"'");
+			st.executeUpdate("update products set Pname='"+name1+"' where Pname='"+name2+"'");
+			
+			st.executeUpdate("Update suppliers set Pname='"+name1+"' where Pname='"+name2+"'");
 			
 			System.out.println("\nThe item has been modified successfully");
 			
@@ -80,14 +83,17 @@ class demo
 		
 		combine();
 		
-		System.out.println("Enter id to modify");
-		int size=scan.nextInt();
+		System.out.println("Enter name of product to modify");
+		String name2=scan.next();
+		
 		
 		System.out.println("Enter the new catagory for item:");
 		String name1=scan.next();
 		
 		Statement st = con.createStatement();
-		st.executeUpdate("update suppliers set category_of_commodity='"+name1+"' where id='"+size+"'");
+		st.executeUpdate("update suppliers set category_of_commodity='"+name1+"' where Pname='"+name2+"'");
+		
+		st.executeUpdate("update products set catagory='"+name1+"' where Pname='"+name2+"'");
 		
 		System.out.println("\nThe item has been modified successfully");
 		
@@ -100,14 +106,17 @@ class demo
 			try {
 				combine();
 				
-				System.out.println("Enter id to modify");
-				int size=scan.nextInt();
+				System.out.println("Enter name of product to modify");
+				String name2=scan.next();
+				
 				
 				System.out.println("Enter amount of new stock for item:");
 				int price=scan.nextInt();
 				
 				Statement st = con.createStatement();
-				st.executeUpdate("update suppliers set Amount_of_products='"+price+"' where id='"+size+"'");
+				st.executeUpdate("update suppliers set Amount_of_products='"+price+"' where Pname='"+name2+"'");
+				
+				st.executeUpdate("update products set Pstock='"+price+"' where Pname='"+name2+"'");
 				
 				System.out.println("\nThe item has been modified successfully");
 				
@@ -141,15 +150,13 @@ class demo
 					e.printStackTrace();
 		}
 	}
+	
 	public static void modify()throws ClassNotFoundException, SQLException
 	{
 		
-		
 		int id;
 		combine();
-		
 	
-		
 		do
 		{
 			System.out.println("\n\t \t Modify Menu \n"
@@ -202,24 +209,24 @@ class demo
 		
 		long millis=System.currentTimeMillis();  
         java.sql.Date date=new java.sql.Date(millis);  
+        
 		Statement st = con.createStatement();
 		st.executeUpdate("insert into products (Pname,Pprice,Catagory,Pstock,Date) values ('"+name1+"','"+price+"','"+cats+"','"+stock+"','"+date+"')");
 		
 		//Statement st2 = con1.createStatement();
-		st.executeUpdate("INSERT INTO suppliers(Name, category_of_commodity,Date_of_Commodity,Amount_of_products) VALUES ('"+supname+"','"+cats+"','"+date+"','"+stock+"')");
+		st.executeUpdate("INSERT INTO suppliers(Name, Pname,category_of_commodity,Date_of_Commodity,Amount_of_products) VALUES ('"+supname+"','"+name1+"','"+cats+"','"+date+"','"+stock+"')");
 		
-		System.out.println("\nItem has been addeded to the sugggested item list");
+		System.out.println("\nItem has been addeded to the item list");
 	
 		
 	}
 
  }
 	
-
-public class suppliers extends demo {
+		public class suppliers extends demo {
 	
 	/*
-	 * This is the method module that controls the 
+	  * This is the method module that controls the 
 	 * running and executing of the whole program
 	 * and the logic.
 	 */
