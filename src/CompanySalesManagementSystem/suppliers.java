@@ -223,14 +223,14 @@ class demo
 
  }
 	
-		public class suppliers extends demo {
+	public class suppliers extends demo {
 	
 	/*
 	  * This is the method module that controls the 
 	 * running and executing of the whole program
 	 * and the logic.
 	 */
-		public void collect() throws SQLException, ClassNotFoundException
+	public void collect() throws SQLException, ClassNotFoundException
 		{
 			
 			scan = new Scanner(System.in);
@@ -270,7 +270,7 @@ class demo
 		System.out.println("\n \t \t \t \t \t *** Thank you our dear Supplier *** \n ");
 	}
 		
-		public static void main(String args[]) throws ClassNotFoundException, SQLException
+	public static void main(String args[]) throws ClassNotFoundException, SQLException
 		{
 			
 			suppliers nm = new suppliers();

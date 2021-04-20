@@ -13,7 +13,7 @@ class demo1
 	static String query="select * from products";
 	static String result;
 	static Connection con;
-	static Statement st,st1,st2;
+	static Statement st,st1,st2,st3;
 	static Scanner scan;
 	static String name;
 	static int size,price;
@@ -58,6 +58,9 @@ class demo1
 	
 		if(x == 'y' || x== 'Y')
 		{
+			long millis=System.currentTimeMillis();  
+	        java.sql.Date date=new java.sql.Date(millis);  
+	        
 			System.out.println("Purchase Succesfully done");
 			PreparedStatement st1 = con.prepareStatement("Update products set Pprice=((Pprice/?)) where Pname='"+name+"'");
 			st1.setInt(1, size);
@@ -66,6 +69,13 @@ class demo1
 			PreparedStatement st2 = con.prepareStatement("Update products set Pstock=(Pstock-?) where Pname='"+name+"'");
 			st2.setInt(1, size);
 			st2.executeUpdate();
+			
+			Statement st3 = con.createStatement();
+			ResultSet rs1 =st.executeQuery("Select Pstock from products where Pname='"+name+"'");
+			rs1.next();
+			int stck = rs1.getInt("Pstock");
+			
+			st3.executeUpdate("insert into companysales (name,items_bought,remainigquantity,Date) values ('"+name+"','"+size+"','"+stck+"','"+date+"')");
 			System.out.println("\nThe product has been bought successfully");
 		}
 		else if(x == 'n' || x== 'N')

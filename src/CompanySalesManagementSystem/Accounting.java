@@ -72,9 +72,9 @@ class demo4
 		/*
 		*This is actual part the runs the whole module
 		*/		
-		public class Accounting extends demo4{
+	public class Accounting extends demo4{
 	
-		public static void main (String args[]) throws ClassNotFoundException, SQLException
+	public static void main (String args[]) throws ClassNotFoundException, SQLException
 		{
 			Accounting acc = new Accounting();
 			acc.work();	

@@ -4,7 +4,7 @@ import java.util.*;
 import java.sql.*;
 
 
-public class Login {
+	public class Login {
 
 	static Scanner scan;
 	static String id;

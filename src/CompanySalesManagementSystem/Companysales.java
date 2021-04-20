@@ -133,7 +133,7 @@ class demo3
 	}
 }
 
-public class Companysales extends demo3{
+	public class Companysales extends demo3{
 
 	/*
 	*Running the main Companysales and all it's methods implemented in the above
