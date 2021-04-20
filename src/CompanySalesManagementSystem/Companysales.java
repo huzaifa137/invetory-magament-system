@@ -27,12 +27,12 @@ class demo3
 		Statement st =con.createStatement();
 		ResultSet rs =st.executeQuery(query);
 		
-			System.out.println("\n\nid \t Name \t \t Remainingquantity \t Date");
-			System.out.println("------------------------------------------------------------------------------------------");
+			System.out.println("\n\nid \t Name \t Items_bought \t Remainingquantity \t Date");
+			System.out.println("------------------------------------------------------------------");
 		while(rs.next())
 		{
 			
-			System.out.println(rs.getInt("id") + "\t"+rs.getString("name") + "\t\t " +    rs.getInt("remainigquantity") + "\t \t \t" + rs.getDate("Date"));
+			System.out.println(rs.getInt("id") + "\t"+rs.getString("name") + "\t\t " + rs.getInt("items_bought") +  "\t \t"+  rs.getInt("remainigquantity") + "\t\t" + rs.getDate("Date"));
 		}
 	}
 	

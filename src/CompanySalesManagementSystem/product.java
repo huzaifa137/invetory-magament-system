@@ -193,7 +193,8 @@ class demo2
 		Statement st = con.createStatement();
 		st.executeUpdate("insert into products (Pname,Pprice,Catagory,Pstock,Date) values ('"+name+"','"+price+"','"+cat+"','"+stock+"','"+date+"')");
 		
-		System.out.println("\nItem has been addeded to the sugggested item list");
+		st.executeUpdate("INSERT INTO suppliers(Pname,category_of_commodity,Date_of_Commodity,Amount_of_products) VALUES ('"+name+"','"+cat+"','"+date+"','"+stock+"')");
+		System.out.println("\nItem has been addeded to the item list");
 	
 	}
 	
