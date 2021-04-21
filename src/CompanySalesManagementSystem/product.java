@@ -266,25 +266,25 @@ class demo2
 	 */
 	public static void search() throws SQLException, ClassNotFoundException
 	{
-
 			
-			scan = new Scanner(System.in);
-			Class.forName("com.mysql.cj.jdbc.Driver");
-			con = DriverManager.getConnection(url, user, pass);
-
+			{
+			
+			combine();
+			
 			PreparedStatement st = con.prepareStatement("select * from products where Pname=(?)");
-			System.out.println("Enter the item you need ");
+			System.out.println("Enter the name of the item you need ");
 			String name=scan.nextLine();
 			st.setString(1, name);
 			ResultSet rs = st.executeQuery();
 			
-			while(rs.next())
-			{
-				
-				System.out.println("\nName   \t \t categories  \t  \t Pprice \tRemainingStock");
-				System.out.println("--------------------------------------------------------------------------------------------------------");;
-				System.out.println(rs.getString(2) + "  \t  " + rs.getString(4) +"   \t \t "+ rs.getInt(3) +"\t \t \t "+ rs.getInt(5));
-				
+				System.out.println("\nName   \t category  \t Pprice \tRemainingStock");
+				System.out.println("------------------------------------------------------------");
+				while(rs.next())
+				{
+					System.out.println(rs.getString(2) + "  \t  " + rs.getString(4) +"   \t "+ rs.getInt(3) +"\t \t"+ rs.getInt(5));
+					
+				}
+			
 			}	
 		}
 }

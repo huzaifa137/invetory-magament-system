@@ -7,7 +7,7 @@ import java.util.Scanner;
 
 class demo4
 {
-	
+	static Scanner scan;
 	/*
 	* This is used to display the view of the whole data in the company
 	*/
@@ -40,10 +40,10 @@ class demo4
 	* It does display the whole logic which 
 	* of how this module works
 	*/	
-	public void work()
+	public void work() throws ClassNotFoundException, SQLException
 		{
 		int choice;
-		Scanner scan = new Scanner(System.in);
+		scan = new Scanner(System.in);
 		do
 		{
 		System.out.println("\n \t \t Accounting Menu \n "
@@ -56,15 +56,11 @@ class demo4
 		switch(choice)
 		{
 			case 1:
-			try {
 				view();
-			} catch (ClassNotFoundException | SQLException e) {
-				e.printStackTrace();
-			}
-			break;	
+				break;	
 		}
 	}while(choice != 2);
-	scan.close();
+	
 	}
 
 }

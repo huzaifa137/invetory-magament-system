@@ -101,7 +101,7 @@ class demo3
 					+ "\n2.Modify CompanySales"
 					+ "\n3.Exit");
 		
-			System.out.println("\nChoose the choice you wish to modify");
+			System.out.println("\nChoose your choice ");
 			id=scan.nextInt();
 			
 			switch(id) {

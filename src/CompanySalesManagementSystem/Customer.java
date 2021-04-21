@@ -110,16 +110,16 @@ class demo1
 			combine();
 			
 			PreparedStatement st = con.prepareStatement("select * from products where Pname=(?)");
-			System.out.println("Enter the item you need ");
+			System.out.println("Enter the name of the item you need ");
 			String name=scan.nextLine();
 			st.setString(1, name);
 			ResultSet rs = st.executeQuery();
 			
-				System.out.println("\nName   \t \t categories  \t  \t Pprice \tRemainingStock");
-				System.out.println("--------------------------------------------------------------------------------------------------------");;
+				System.out.println("\nName   \t category  \t Pprice \tRemainingStock");
+				System.out.println("------------------------------------------------------------");
 			while(rs.next())
 			{
-				System.out.println(rs.getString(2) + "  \t  " + rs.getString(4) +"   \t \t "+ rs.getInt(3) +"\t \t \t "+ rs.getInt(5));
+				System.out.println(rs.getString(2) + "  \t  " + rs.getString(4) +"   \t "+ rs.getInt(3) +"\t \t"+ rs.getInt(5));
 				
 			}
 		}	
