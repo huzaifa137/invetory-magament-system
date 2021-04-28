@@ -13,9 +13,10 @@ class demo1
 	static String query="select * from products";
 	static String result;
 	static Connection con;
-	static Statement st,st1,st2,st3;
+	static Statement st,st1,st2,st3,st4;
 	static Scanner scan;
 	static String name;
+	static ResultSet rs;
 	static int size,price;
 	
 	public static  void combine() throws ClassNotFoundException, SQLException
@@ -70,6 +71,11 @@ class demo1
 			st2.setInt(1, size);
 			st2.executeUpdate();
 			
+			PreparedStatement st4 = con.prepareStatement("Update suppliers set Amount_of_products=(Amount_of_products-?) where Pname='"+name+"'");
+			st4.setInt(1, size);
+			st4.executeUpdate();
+			
+			
 			Statement st3 = con.createStatement();
 			ResultSet rs1 =st.executeQuery("Select Pstock from products where Pname='"+name+"'");
 			rs1.next();
@@ -108,20 +114,24 @@ class demo1
 		{
 			
 			combine();
-			
-			PreparedStatement st = con.prepareStatement("select * from products where Pname=(?)");
 			System.out.println("Enter the name of the item you need ");
 			String name=scan.nextLine();
-			st.setString(1, name);
-			ResultSet rs = st.executeQuery();
 			
+			st=con.createStatement();
+			rs = st.executeQuery("select * from products where Pname='"+name+"'");
+			rs.next();
+			
+			if(rs.getRow()>0)
+			{
 				System.out.println("\nName   \t category  \t Pprice \tRemainingStock");
 				System.out.println("------------------------------------------------------------");
-			while(rs.next())
-			{
-				System.out.println(rs.getString(2) + "  \t  " + rs.getString(4) +"   \t "+ rs.getInt(3) +"\t \t"+ rs.getInt(5));
-				
+				System.out.println(rs.getString(2) + "  \t  " + rs.getString(4) +"   \t "+ rs.getInt(3) +"\t \t"+ rs.getInt(5));	
 			}
+			else
+			{	
+				System.out.println("\nItem is not found in the Stock");
+			}
+			
 		}	
 		
 	}
