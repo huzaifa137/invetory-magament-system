@@ -261,6 +261,7 @@ class demo
 					suggest();
 					break;
 				case 4:
+					
 					addproduct();
 					break;
 				}

@@ -2,7 +2,6 @@ package CompanySalesManagementSystem;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -17,6 +16,7 @@ class demo2
 	static String query="select * from products";
 	static Scanner scan;
 	static String name;
+	static ResultSet rs;
 	static Statement st;
 	static Connection con;
 	static int size,price;
@@ -266,27 +266,31 @@ class demo2
 	 */
 	public static void search() throws SQLException, ClassNotFoundException
 	{
-			
-			{
+
+		{
 			
 			combine();
-			
-			PreparedStatement st = con.prepareStatement("select * from products where Pname=(?)");
 			System.out.println("Enter the name of the item you need ");
 			String name=scan.nextLine();
-			st.setString(1, name);
-			ResultSet rs = st.executeQuery();
 			
+			st=con.createStatement();
+			rs = st.executeQuery("select * from products where Pname='"+name+"'");
+			rs.next();
+			
+			if(rs.getRow()>0)
+			{
 				System.out.println("\nName   \t category  \t Pprice \tRemainingStock");
 				System.out.println("------------------------------------------------------------");
-				while(rs.next())
-				{
-					System.out.println(rs.getString(2) + "  \t  " + rs.getString(4) +"   \t "+ rs.getInt(3) +"\t \t"+ rs.getInt(5));
-					
-				}
+				System.out.println(rs.getString(2) + "  \t  " + rs.getString(4) +"   \t "+ rs.getInt(3) +"\t \t"+ rs.getInt(5));	
+			}
+			else
+			{	
+				System.out.println("\nItem is not found in the Stock");
+			}
 			
-			}	
-		}
+		}	
+		
+	}
 }
 
  	public class product extends demo2{
