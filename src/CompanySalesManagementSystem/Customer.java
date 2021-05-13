@@ -13,7 +13,7 @@ class demo1
 	static String query="select * from products";
 	static String result;
 	static Connection con;
-	static Statement st,st1,st2,st3,st4;
+	static Statement st,st1,st2,st3,st4,st5;
 	static Scanner scan;
 	static String name;
 	static ResultSet rs;
@@ -37,6 +37,18 @@ class demo1
 		System.out.println("\nEnter item name to buy");
 		name=scan.next();
 		
+		Statement st5 = con.createStatement();
+		ResultSet rs11 =st5.executeQuery("Select Pstock from products where Pname='"+name+"'");
+		rs11.next();
+		
+		int dons1 = rs11.getInt("Pstock");
+		
+		if(dons1 == 0)
+		{
+			System.out.println("The item is out of stock ");
+		}
+		else
+		{
 		System.out.println("\nEnter the quantity of the product");
 		size=scan.nextInt();
 		
@@ -50,7 +62,7 @@ class demo1
 		int dons = rs.getInt("Pprice");
 		
 		
-		System.out.println( dons +"₹"+"\t is total amount needed to purchase selected goods\n"
+		System.out.println( dons +"rs"+"\t is total amount needed to purchase selected goods\n"
 				+ "\nDo you wish to continue and purchace the products?"
 				+ "\nPress y to purchase or n to cancel order ");
 		
@@ -102,7 +114,8 @@ class demo1
 			st1.executeUpdate();
 			
 		}
-		
+	
+		}
 	}
 	
 	/*

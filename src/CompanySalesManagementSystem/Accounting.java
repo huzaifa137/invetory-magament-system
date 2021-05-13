@@ -7,7 +7,14 @@ import java.util.Scanner;
 
 class demo4
 {
+	static String url="jdbc:mysql://localhost:3306/inventory";
+	static String user="root";
+	static String pass="";
 	static Scanner scan;
+	static ResultSet rs;
+	static Statement st;
+	static Connection con;
+	
 	/*
 	* This is used to display the view of the whole data in the company
 	*/
@@ -36,6 +43,32 @@ class demo4
 		}
 	}
 	
+	
+	public static void suggest() throws SQLException
+	{
+		
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			con =DriverManager.getConnection(url, user, pass);
+			Statement st = con.createStatement();
+		
+			ResultSet rs = st.executeQuery("select * from suggest");
+			
+			System.out.println("\n \t \t \t Supplier Details ");
+			
+				System.out.println("\nid \t Name");
+				System.out.println("------------------");
+			while(rs.next())
+			{
+				String table = rs.getInt(1)+ "\t" + rs.getString(2);
+				System.out.println(table);
+				
+			}
+				} catch (ClassNotFoundException e) {
+					e.printStackTrace();
+		}
+	}
+	
 	/*
 	* It does display the whole logic which 
 	* of how this module works
@@ -48,7 +81,8 @@ class demo4
 		{
 		System.out.println("\n \t \t Accounting Menu \n "
 				+ "\n 1.View All Accounting Details"
-				+ "\n 2.Exit");
+				+ "\n 2.View suggested goods"
+				+ "\n 3.Exit");
 		
 		System.out.println("\n Choose from the above");
 		
@@ -57,9 +91,12 @@ class demo4
 		{
 			case 1:
 				view();
-				break;	
+				break;
+			case 2:
+				suggest();
+				break;
 		}
-	}while(choice != 2);
+	}while(choice != 3);
 	
 	}
 

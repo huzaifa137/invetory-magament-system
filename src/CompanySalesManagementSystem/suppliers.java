@@ -126,30 +126,6 @@ class demo
 			}
 		}
 
-	public static void suggest() throws SQLException
-	{
-		
-		try {
-			Class.forName("com.mysql.cj.jdbc.Driver");
-			con =DriverManager.getConnection(url, name, pass);
-			Statement st = con.createStatement();
-		
-			ResultSet rs = st.executeQuery("select * from suggest");
-			
-			System.out.println("\n \t \t \t Supplier Details ");
-			
-				System.out.println("\nid \t Name");
-				System.out.println("------------------");
-			while(rs.next())
-			{
-				String table = rs.getInt(1)+ "\t" + rs.getString(2);
-				System.out.println(table);
-				
-			}
-				} catch (ClassNotFoundException e) {
-					e.printStackTrace();
-		}
-	}
 	
 	public static void modify()throws ClassNotFoundException, SQLException
 	{
@@ -240,9 +216,8 @@ class demo
 				System.out.println("\n \t \t \t Supplier's Menu \n "
 						+ "\n 1. view all supplier Details"
 						+ "\n 2. Modify"
-						+ "\n 3. View Suggested goods"
-						+ "\n 4. Add product"
-						+ "\n 5. Exit");
+						+ "\n 3. Add product"
+						+ "\n 4. Exit");
 				
 				System.out.println("\nMake a choice from the Above");
 				choice = scan.nextInt();
@@ -257,16 +232,13 @@ class demo
 				case 2:
 					modify();
 					break;
-				case 3:
-					suggest();
-					break;
-				case 4:
 					
+				case 3:
 					addproduct();
 					break;
 				}
 			
-			}while(choice != 5);
+			}while(choice != 4);
 			
 		System.out.println("\n \t \t \t \t \t *** Thank you our dear Supplier *** \n ");
 	}
